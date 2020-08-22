@@ -3,7 +3,9 @@ package com.example.texting.mainModule.view;
 import android.app.NotificationManager;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.texting.R;
+import com.example.texting.addModule.view.AddFragment;
 import com.example.texting.common.pojo.User;
 import com.example.texting.common.utils.UtilsCommon;
 import com.example.texting.loginModule.view.LoginActivity;
@@ -33,6 +36,7 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity implements OnItemClickListener, MainView {
@@ -109,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.action_logout:
                 presenter.signOff();
                 Intent intent = new Intent(this, LoginActivity.class);
@@ -122,10 +126,29 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 
                 break;
             case R.id.action_about:
-
+                openAbout();
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void openAbout() {
+        LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.dialog_about, null);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this, R.style.DialogFragmentTheme)
+                .setTitle(R.string.main_menu_about)
+                .setView(view)
+                .setPositiveButton(R.string.common_label_ok, null)
+                .setNeutralButton(R.string.about_privacy, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/sebastianl14"));
+                        startActivity(intent);
+                    }
+                });
+
+        builder.show();
     }
 
 
@@ -148,16 +171,21 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         presenter.onDestroy();
     }
 
-    private void clearNotifications(){
+    private void clearNotifications() {
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        if (notificationManager != null){
+        if (notificationManager != null) {
             notificationManager.cancelAll();
         }
     }
 
+    @OnClick(R.id.fab)
+    public void onAddClicked() {
+        new AddFragment().show(getSupportFragmentManager(), getString(R.string.addFriend_title));
+    }
+
     /*
-    *  Main View
-    * */
+     *  Main View
+     * */
     @Override
     public void friendAdded(User user) {
         userAdapter.add(user);
@@ -211,8 +239,8 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
     }
 
     /*
-    *  OnItemClickListener
-    * */
+     *  OnItemClickListener
+     * */
     @Override
     public void onItemClick(User user) {
 
@@ -243,4 +271,5 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
     public void onDenyRequest(User user) {
         presenter.denyRequest(user);
     }
+
 }

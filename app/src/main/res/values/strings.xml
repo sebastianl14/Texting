@@ -64,4 +64,7 @@
     <string name="profile_message_imageUpdated">Imagen de perfil actualizada exitosamente.</string>
     <string name="title_activity_main">Contactos</string>
     <string name="main_item_max_messageUnread">99+</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
