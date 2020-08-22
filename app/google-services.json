@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "813365235301",
+    "firebase_url": "https://texting-4d604.firebaseio.com",
+    "project_id": "texting-4d604",
+    "storage_bucket": "texting-4d604.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:813365235301:android:9288a2f7b135a4622a408c",
+        "android_client_info": {
+          "package_name": "com.example.texting"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "813365235301-ki1c07qv1hbone0r4ca73iq7lkfl23fj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.texting",
+            "certificate_hash": "589aad79e85044a1447e29df4c8b6624f1c372c0"
+          }
+        },
+        {
+          "client_id": "813365235301-q7lleq33qnld9utv2uv05gbgr7pfdl02.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB75-Fh-ZyhFBFKyXUh6yQirUgwqv2x_1c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "813365235301-q7lleq33qnld9utv2uv05gbgr7pfdl02.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

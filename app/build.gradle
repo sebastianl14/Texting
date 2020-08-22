@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 29
@@ -17,7 +18,25 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
 }
+
+def firebaseVersion = '17.0.0'
+def firebaseCoreVersion = '17.0.0'
+def firebaseMessagingVersion = '19.0.0'
+
+def circleImageViewVersion = '2.2.0'
+def materialShowcaseView = '1.2.0'
+def butterknifeVersion = '10.0.0'
+def eventbusVersion = '3.1.1'
+def glideVersion = '4.8.0'
+def gsonVersion = '2.8.5'
+def photoView = '2.1.4'
+def volley = '1.1.1'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -26,6 +45,27 @@ dependencies {
 
     //Firebase UI
     implementation 'com.firebaseui:firebase-ui-auth:6.2.1'
+
+    implementation "com.google.firebase:firebase-messaging:${firebaseMessagingVersion}"
+    implementation "com.google.firebase:firebase-auth:${firebaseVersion}"
+    implementation "com.google.firebase:firebase-core:${firebaseCoreVersion}"
+    implementation "com.google.firebase:firebase-database:${firebaseVersion}"
+    implementation "com.google.firebase:firebase-storage:${firebaseVersion}"
+
+    implementation 'com.google.android.material:material:1.1.0'
+    annotationProcessor "com.jakewharton:butterknife-compiler:${butterknifeVersion}"
+    annotationProcessor "com.github.bumptech.glide:compiler:${glideVersion}"
+
+    implementation "de.hdodenhof:circleimageview:${circleImageViewVersion}"
+    implementation "com.jakewharton:butterknife:${butterknifeVersion}"
+    implementation "com.github.bumptech.glide:glide:${glideVersion}"
+    implementation "com.github.chrisbanes:PhotoView:${photoView}"
+    implementation "org.greenrobot:eventbus:${eventbusVersion}"
+    implementation "com.google.code.gson:gson:${gsonVersion}"
+    implementation "com.android.volley:volley:${volley}"
+
+    implementation "com.github.deano2390:MaterialShowcaseView:${materialShowcaseView}"
+
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'

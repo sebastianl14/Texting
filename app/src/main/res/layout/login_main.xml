@@ -4,15 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".loginModule.view.LoginActivity">
 
     <TextView
+        android:id="@+id/tvMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:text="@string/login_message_starting"
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/login_message_textSize"
+        android:textStyle="bold"
+        android:drawableBottom="@mipmap/ic_launcher"
+        android:drawablePadding="@dimen/common_padding_small"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_emoticon_tongue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tvMessage" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        style="?android:attr/progressBarStyleInverse"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tvMessage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
