@@ -1,5 +1,6 @@
 package com.example.texting.mainModule.view;
 
+import android.app.ActivityOptions;
 import android.app.NotificationManager;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -28,6 +30,7 @@ import com.example.texting.mainModule.MainPresenterClass;
 import com.example.texting.mainModule.view.adapters.OnItemClickListener;
 import com.example.texting.mainModule.view.adapters.RequestAdapter;
 import com.example.texting.mainModule.view.adapters.UserAdapter;
+import com.example.texting.profileModule.view.ProfileActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -40,6 +43,8 @@ import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity implements OnItemClickListener, MainView {
+
+    private static final int RC_PROFILE = 23;
 
     @BindView(R.id.imgProfile)
     CircleImageView imgProfile;
@@ -123,6 +128,17 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                 startActivity(intent);
                 break;
             case R.id.action_profile:
+                Intent intentProfile = new Intent(this, ProfileActivity.class);
+                intentProfile.putExtra(User.USER_NAME, user.getUsername());
+                intentProfile.putExtra(User.EMAIL, user.getEmail());
+                intentProfile.putExtra(User.PHOTO_URL, user.getPhotoUrl());
+
+                if (UtilsCommon.hasMaterialDesign()){
+                    startActivityForResult(intentProfile, RC_PROFILE,
+                            ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+                } else {
+                    startActivityForResult(intentProfile, RC_PROFILE);
+                }
 
                 break;
             case R.id.action_about:
@@ -130,6 +146,23 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK){
+            switch (requestCode){
+                case RC_PROFILE:
+                    if (data != null){
+                        user.setUsername(data.getStringExtra(User.USER_NAME));
+                        user.setPhotoUrl(data.getStringExtra(User.PHOTO_URL));
+                        configToolbar();
+                    }
+                    break;
+            }
+        }
     }
 
     private void openAbout() {

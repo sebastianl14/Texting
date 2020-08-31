@@ -1,9 +1,14 @@
 package com.example.texting.common.utils;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.os.Build;
 import android.util.Patterns;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import androidx.fragment.app.FragmentActivity;
 
@@ -12,6 +17,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.texting.R;
 import com.example.texting.mainModule.view.MainActivity;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -68,5 +74,26 @@ public class UtilsCommon {
         }
 
         return isValid;
+    }
+
+    /**
+     * Verificación de versión
+     * @return
+     */
+    public static boolean hasMaterialDesign() {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
+    }
+
+    /**
+     * Mostrar mensajes con Snackbar.
+     * @param contentMain
+     * @param resMsg
+     */
+    public static void showSnackbar(View contentMain, int resMsg) {
+        showSnackbar(contentMain, resMsg, Snackbar.LENGTH_SHORT);
+    }
+
+    public static void showSnackbar(View contentMain, int resMsg, int duration) {
+        Snackbar.make(contentMain, resMsg, duration).show();
     }
 }

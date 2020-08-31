@@ -27,6 +27,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".profileModule.view.ProfileActivity"
+            android:label="@string/profile_title"
+            android:windowSoftInputMode="stateHidden" />
     </application>
 
 </manifest>

@@ -2,6 +2,7 @@ package com.example.texting.common.model.dataAccess;
 
 import com.example.texting.common.pojo.User;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class FirebaseAuthenticationAPI {
 
@@ -34,5 +35,10 @@ public class FirebaseAuthenticationAPI {
             user.setUri(firebaseAuth.getCurrentUser().getPhotoUrl());
         }
         return user;
+    }
+
+
+    public FirebaseUser getCurrentUser() {
+        return firebaseAuth.getCurrentUser();
     }
 }
