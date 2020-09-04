@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.texting.R;
 import com.example.texting.addModule.view.AddFragment;
+import com.example.texting.chatModule.view.ChatActivity;
 import com.example.texting.common.pojo.User;
 import com.example.texting.common.utils.UtilsCommon;
 import com.example.texting.loginModule.view.LoginActivity;
@@ -276,7 +277,17 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
      * */
     @Override
     public void onItemClick(User user) {
+        Intent intent = new Intent(this, ChatActivity.class);
+        intent.putExtra(User.UID, user.getUid());
+        intent.putExtra(User.USER_NAME, user.getUsername());
+        intent.putExtra(User.EMAIL, user.getEmail());
+        intent.putExtra(User.PHOTO_URL, user.getPhotoUrl());
 
+        if (UtilsCommon.hasMaterialDesign()) {
+            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+        } else {
+            startActivity(intent);
+        }
     }
 
     @Override

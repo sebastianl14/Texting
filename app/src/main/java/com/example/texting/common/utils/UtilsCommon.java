@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import androidx.appcompat.widget.AppCompatEditText;
 import androidx.fragment.app.FragmentActivity;
 
 import com.bumptech.glide.Glide;
@@ -39,6 +40,12 @@ public class UtilsCommon {
         return preKey.replace(".","_");
     }
 
+    public static String getEmailToTopic(String email){
+        String topic = getEmailEncoded(email);
+        topic = topic.replace("@", "_64");
+
+        return topic;
+    }
 
     /**
      * Cargar Imagenes Basicas
@@ -95,5 +102,10 @@ public class UtilsCommon {
 
     public static void showSnackbar(View contentMain, int resMsg, int duration) {
         Snackbar.make(contentMain, resMsg, duration).show();
+    }
+
+    public static boolean validateMessage(EditText etMessage) {
+        return etMessage.getText() != null &&
+                !etMessage.getText().toString().isEmpty();
     }
 }

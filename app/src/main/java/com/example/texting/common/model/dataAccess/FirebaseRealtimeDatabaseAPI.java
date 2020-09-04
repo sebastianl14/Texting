@@ -58,6 +58,8 @@ public class FirebaseRealtimeDatabaseAPI {
 
         Map<String, Object> values = new HashMap<>();
         values.put(User.LAST_CONNECTION_WITH, online ? lastConnectionWith : ServerValue.TIMESTAMP);
+        //offline
+        getUserReferenceByUid(uid).child(User.LAST_CONNECTION_WITH).keepSynced(true);
         getUserReferenceByUid(uid).updateChildren(values);
 
         if (online){
