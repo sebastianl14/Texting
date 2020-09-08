@@ -46,7 +46,9 @@ import com.example.texting.common.pojo.Message;
 import com.example.texting.common.pojo.User;
 import com.example.texting.common.utils.UtilsCommon;
 import com.example.texting.common.utils.UtilsImage;
+import com.example.texting.common.utils.UtilsNetwork;
 import com.example.texting.mainModule.view.MainActivity;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -148,7 +150,11 @@ public class ChatActivity extends AppCompatActivity implements OnItemClickListen
     @Override
     protected void onResume() {
         super.onResume();
-        presenter.onResume();
+        if (UtilsNetwork.isOnline(this)) {
+            presenter.onResume();
+        } else {
+            UtilsCommon.showSnackbar(contentMain, R.string.common_message_noInternet, Snackbar.LENGTH_LONG);
+        }
     }
 
     @Override

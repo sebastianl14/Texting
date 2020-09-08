@@ -23,4 +23,6 @@ public class Constants {
     public static final String TITLE = "title";
     public static final String MESSAGE = "message";
     public static final String TOPIC = "topic";
+
+    public static final String SUCCESS = "success";
 }

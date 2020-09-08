@@ -2,6 +2,7 @@ package com.example.texting.mainModule.model;
 
 import com.example.texting.common.Constants;
 import com.example.texting.common.model.BasicEventCallback;
+import com.example.texting.common.model.dataAccess.FirebaseCloudMessagingAPI;
 import com.example.texting.common.pojo.User;
 import com.example.texting.mainModule.events.MainEvent;
 import com.example.texting.mainModule.model.dataAccess.Authentication;
@@ -20,13 +21,17 @@ public class MainInteractorClass implements MainInteractor {
 
     private RealtimeDatabase database;
     private Authentication authentication;
+    //notify
+    private FirebaseCloudMessagingAPI cloudMessagingAPI;
+
 
     private User myUser = null;
 
     public MainInteractorClass() {
         database = new RealtimeDatabase();
         authentication = new Authentication();
-
+        //notify
+        cloudMessagingAPI = FirebaseCloudMessagingAPI.getInstance();
     }
 
     @Override
@@ -92,6 +97,8 @@ public class MainInteractorClass implements MainInteractor {
 
     @Override
     public void signOff() {
+        cloudMessagingAPI.unsuscribeToMyTopic(getCurrentUser().getEmail());
+
         authentication.signOff();
     }
 

@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.net.Uri;
 
 import com.example.texting.chatModule.events.ChatEvent;
+import com.example.texting.chatModule.model.dataAccess.NotificationRS;
 import com.example.texting.chatModule.model.dataAccess.RealtimeDatabase;
 import com.example.texting.chatModule.model.dataAccess.Storage;
 import com.example.texting.common.Constants;
+import com.example.texting.common.model.EventErrorTypeListener;
 import com.example.texting.common.model.StorageUploadImageCallback;
 import com.example.texting.common.model.dataAccess.FirebaseAuthenticationAPI;
 import com.example.texting.common.pojo.Message;
@@ -25,6 +27,8 @@ public class ChatInteractorClass implements ChatInteractor {
     private RealtimeDatabase database;
     private FirebaseAuthenticationAPI authenticationAPI;
     private Storage storage;
+    //notify
+    private NotificationRS notificationRS;
 
     private User myUser;
     private String friendUid;
@@ -37,6 +41,7 @@ public class ChatInteractorClass implements ChatInteractor {
         this.database = new RealtimeDatabase();
         this.authenticationAPI = FirebaseAuthenticationAPI.getInstance();
         this.storage = new Storage();
+        this.notificationRS = new NotificationRS();
     }
 
     private User getCurrentUser(){
@@ -121,9 +126,15 @@ public class ChatInteractorClass implements ChatInteractor {
                         if (!uidConnectedFriend.equals(getCurrentUser().getUid())){
                             database.sumUnreadMessages(getCurrentUser().getUid(), friendUid);
 
-                            // TODO: 31/08/2020 notify
                             if (lastConnectionFriend != Constants.ONLINE_VALUE){
-
+                                notificationRS.sendNotification(getCurrentUser().getUsername(), message,
+                                        friendEmail, getCurrentUser().getUid(), getCurrentUser().getEmail(),
+                                        getCurrentUser().getUri(), new EventErrorTypeListener() {
+                                            @Override
+                                            public void onError(int typeEvent, int rsgMsg) {
+                                                post(typeEvent, rsgMsg);
+                                            }
+                                        });
                             }
                         }
                     }

@@ -21,7 +21,7 @@
     <string name="description_img_gellery">Seleccionar imagen desde la Galería.</string>
     <string name="description_img_profile">Imagen de perfil de usuario.</string>
 
-    <string name="addFriend_error_message">Imposible enviar solicitud, intende más tarde.</string>
+    <string name="addFriend_error_message">Imposible enviar solicitud, intente más tarde.</string>
     <string name="addFriend_message_request_dispatched">Solicitud enviada exitosamente</string>
     <string name="addFriend_title">Añadir amigo</string>
 
@@ -69,4 +69,12 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_chat">Chat</string>
     <string name="chat_status_last_connection">Última conexión: %s</string>
+    <string name="common_error_process_data">Error interno, disculpe las molestias</string>
+    <string name="common_error_voley">Error de comunicación con el servidor, intente mas tarde.</string>
+    <string name="chat_error_method_exist">Imposible notificar al usuario, contacte a su administrador.</string>
+    <string name="main_tutorial_message">Aquí puedes agregar a tus amigas, usa su email.\nSolo faltara que acepten tu solicitud de amistad.</string>
+    <string name="main_tutorial_ok">Entendido</string>
+    <string name="main_tutorial_fabAdd">mainFabAdd03</string>
+    <string name="addFriend_error_user_exist">No hay ningún usuario con este email.</string>
+    <string name="addFriend_message_request_exist">Lo siento tu solicitud ya había sido enviada.</string>
 </resources>

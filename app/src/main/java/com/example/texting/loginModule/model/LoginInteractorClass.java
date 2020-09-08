@@ -1,6 +1,7 @@
 package com.example.texting.loginModule.model;
 
 import com.example.texting.common.model.EventErrorTypeListener;
+import com.example.texting.common.model.dataAccess.FirebaseCloudMessagingAPI;
 import com.example.texting.common.pojo.User;
 import com.example.texting.loginModule.events.LoginEvent;
 import com.example.texting.loginModule.model.dataAccess.Authentication;
@@ -14,10 +15,14 @@ public class LoginInteractorClass implements LoginInteractor {
 
     private Authentication authentication;
     private RealtimeDatabase database;
+    //notify
+    private FirebaseCloudMessagingAPI cloudMessagingAPI;
 
     public LoginInteractorClass() {
         authentication = new Authentication();
         database = new RealtimeDatabase();
+        //notify
+        cloudMessagingAPI = FirebaseCloudMessagingAPI.getInstance();
     }
 
     @Override
@@ -47,6 +52,8 @@ public class LoginInteractorClass implements LoginInteractor {
                         }
                     }
                 });
+
+                cloudMessagingAPI.suscribeToMyTopic(user.getEmail());
             }
 
             @Override

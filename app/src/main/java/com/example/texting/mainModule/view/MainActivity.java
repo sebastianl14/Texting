@@ -4,6 +4,7 @@ import android.app.ActivityOptions;
 import android.app.NotificationManager;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -42,6 +44,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
+import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
 
 public class MainActivity extends AppCompatActivity implements OnItemClickListener, MainView {
 
@@ -81,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         configToolbar();
         configAdapter();
         configRecyclerView();
+        configTutorial();
 //
 //        FloatingActionButton fab = findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
@@ -109,6 +113,26 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 
         rvRequest.setLayoutManager(new LinearLayoutManager(this));
         rvRequest.setAdapter(requestAdapter);
+    }
+
+    private void configTutorial() {
+        new MaterialShowcaseView.Builder(this)
+                .setTarget(fab)
+                .setTargetTouchable(true)
+                .setTitleText(R.string.app_name)
+                .setTitleTextColor(ContextCompat.getColor(this, R.color.colorAccent))
+                .setContentText(R.string.main_tutorial_message)
+                .setContentTextColor(ContextCompat.getColor(this, R.color.blue_100))
+                .setDismissText(R.string.main_tutorial_ok)
+                .setDismissTextColor(ContextCompat.getColor(this, android.R.color.white))
+                .setDismissStyle(Typeface.create(Typeface.SANS_SERIF, Typeface.BOLD_ITALIC))
+                .setMaskColour(ContextCompat.getColor(this, R.color.gray_900_t))
+                .singleUse(getString(R.string.main_tutorial_fabAdd))
+                .setDelay(2000)
+                .setFadeDuration(600)
+                .setDismissOnTargetTouch(true)
+                .setDismissOnTouch(true)
+                .show();
     }
 
     @Override
